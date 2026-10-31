@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: unigrade-deployment
+  namespace: unigrade
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: unigrade
+
+  template:
+    metadata:
+      labels:
+        app: unigrade
+
+    spec:
+      containers:
+        - name: unigrade-container
+          image: unigrade-cloudnative:v1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 80
